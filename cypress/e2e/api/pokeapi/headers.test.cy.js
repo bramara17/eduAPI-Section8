@@ -25,5 +25,26 @@ describe ('Validate Header', () =>{
         cy.request('https://pokeapi.co/api/v2/pokemon/bulbasaur').as('bulbasaur')
         cy.get('@bulbasaur').its('body').should('include',{name: "bulbasaur"})
     });
-    
+    it.only('Task 3 Section 9', () => {
+        cy.request('https://pokeapi.co/api/v2/pokemon/ditto').as('urlPoke')
+        var newUser = {
+            "name": 'limber',
+            "url": "https://pokeapi.co/api/v2/ability/7/"
+        } 
+ 
+        cy.get('@urlPoke').should((response) => {
+            //expect(response.body).to.eq(name)
+            
+            expect(response.body).to.eq('{"abilities": [{"ability": {"name": "limber", "url": "https://pokeapi.co/api/v2/ability/7/"},}],}')
+        })
+        //cy.wrap(poke).its('abilities.ability.name').should('eq','limber')
+    });
+    it('Successfully validate negative response', () => {
+        cy.request({
+            method: 'GET',
+            url:'https://pokeapi.co/api/v2/pokemon/eduwork',
+            failOnStatusCode: false
+        }).as('eduwork')
+        cy.get('@eduwork').its('status').should('equal', 404)
+    });
 })
