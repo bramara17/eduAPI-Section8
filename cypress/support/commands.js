@@ -27,15 +27,15 @@ Cypress.Commands.add('loginViaAPI', (
     email = Cypress.env('userEmail'),
     password = Cypress.env('userPassword')
   ) => {
+    var utoken= {
+      "token": "QpwL5tke4Pnpja7X4"
+  }
     cy.request('POST', `${Cypress.env('apiUrl')}/api/login`, {
-      username: email,
-      password,
+      email: email,
+      password
     }).then((response) => {
-    
-      cy.setCookie('sessionId', response.body.sessionId)
-      cy.setCookie('userId', response.body.userId)
-      cy.setCookie('userName', response.body.userName)
-      cy.visit('/#!/main')
+      cy.setCookie('token', response.body.token)
+      expect(response.body.token).to.eq(utoken.token)
       expect(response.status).equal(200)
     })
  })

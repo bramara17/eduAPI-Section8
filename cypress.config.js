@@ -5,7 +5,7 @@ module.exports = defineConfig({
     apiUrl: "https://reqres.in",
     userEmail: "eve.holt@reqres.in",
     userPassword: "cityslicka",
-  },
+  },//menggunakan web reqres.in
 
   e2e: {
     setupNodeEvents(on, config) {
