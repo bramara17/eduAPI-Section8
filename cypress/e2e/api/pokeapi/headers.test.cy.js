@@ -38,11 +38,13 @@ describe ('Validate Header', () =>{
  
         cy.get('@urlPoke').should((response) => {
             //expect(response.body).to.eq(name)
-            expect(response.body.abilities.ability).to.eq(dataPoke.name)
+            expect(response.body.abilities[0].ability.name).to.eq(dataPoke.ability.name)
             
         })
+
         //cy.wrap(poke).its('abilities.ability.name').should('eq','limber')
     });
+
     it('Successfully validate negative response', () => {
         cy.request({
             method: 'GET',
